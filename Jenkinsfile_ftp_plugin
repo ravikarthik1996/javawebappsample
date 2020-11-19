@@ -11,8 +11,10 @@ node {
     def resourceGroup = 'cloud-shell-storage-eastus'
     def webAppName = 'my-own-web-app'
     sh 'mv target/*.war target/ROOT.war'
-    azureWebAppPublish azureCredentialsId: '<mySp1>', publishType: 'file',
+    withCredentials([azureServicePrincipal('<mySp1>')]) {
+      azureWebAppPublish azureCredentialsId: '<mySp1>', publishType: 'file',
                        resourceGroup: resourceGroup, appName: webAppName,
                        filePath: '*.war', sourceDirectory: 'target', targetDirectory: 'webapps'
+  }
   }
 }
