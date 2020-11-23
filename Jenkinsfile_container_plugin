@@ -8,8 +8,8 @@ node {
   }
   
   stage('deploy') {
-    def resourceGroup = 'myResourceGroup'
-    def webAppName = 'my-own-web-app-container'
+    def resourceGroup = 'cloud-shell-storage-eastus'
+    def webAppName = 'my-own-web-app-docker'
     def registryServer = 'containerregistry007.azurecr.io'
     def imageTag = sh script: 'git describe | tr -d "\n"', returnStdout: true
     def imageName = "$registryServer/calculator"
